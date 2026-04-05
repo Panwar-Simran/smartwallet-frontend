@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: #f5f7fb;
+}
+
+/* Theme Colors */
+:root {
+    --primary: #2ea6d6;
+    --secondary: #8e7cc3;
+    --text: #333;
+}
+
+/* Reusable button */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #2494c2;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartWallet Register</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="background">
+    <div class="circle blue"></div>
+    <div class="circle purple"></div>
+</div>
+
+<div class="register-container">
+    <div class="register-card">
+
+   <div class="icon">
+    <i class="fa-solid fa-user-plus"></i>
+</div>
+
+        <h2>Create Account</h2>
+
+        <div id="errorMsg" class="error"></div>
+
+        
+            <form id="registerForm">
+              <input type="text" id="name" placeholder="Full Name" required>
+              <input type="email" id="email" placeholder="Email" required>
+              <input type="tel" id="phone_no" placeholder="Phone Number" required>
+             <div class="password-wrapper">
+             <input type="password" id="password" placeholder="Password" required>
+             <i class="fa-solid fa-eye" id="togglePassword"></i>
+             </div>
+
+            <div class="password-wrapper">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            <i class="fa-solid fa-eye" id="toggleConfirmPassword"></i>
+            </div>
+
+               <button type="submit">Register</button>
+             </form>
+            
+
+        <p class="login-text">
+    Account already exists? <a href="index.html">Login</a>
+        </p>
+
+        <p class="footer">
+            © 2026 SmartWallet | All Rights Reserved
+        </p>
+
+    </div>
+</div>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+
+</body>
+</html>

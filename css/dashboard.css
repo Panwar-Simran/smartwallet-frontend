@@ -1,0 +1,190 @@
+/* ===== Background circles ===== */
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.background .circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.3;
+}
+
+.blue {
+    width: 400px;
+    height: 400px;
+    background: #2ea6d6;
+    top: -100px;
+    right: -100px;
+}
+
+.purple {
+    width: 400px;
+    height: 400px;
+    background: #8e7cc3;
+    bottom: -120px;
+    left: -120px;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #2ea6d6;
+    color: white;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar button {
+    background: white;
+    color: #2ea6d6;
+    border: none;
+    padding: 5px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* ===== Tabs ===== */
+.tabs {
+    display: flex;
+    justify-content: center;
+    background-color: #f1f1f1;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    cursor: pointer;
+    border: none;
+    background: #f1f1f1;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.tab-btn:hover {
+    background: #ddd;
+}
+.tab-btn.active {
+    background-color: #2ea6d6;
+    color: white;
+}
+
+/* ===== Sections ===== */
+.tab-section {
+    display: none;
+    padding: 25px;
+}
+.tab-section.active {
+    display: block;
+}
+
+/* ===== Cards ===== */
+.wallet-card, #viewProfile {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.wallet-card h3, #viewProfile p {
+    margin: 10px 0;
+}
+
+.wallet-actions button {
+    margin: 10px 10px 0 0;
+    background: #2ea6d6;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.wallet-actions button:hover {
+    background: #2381a9;
+}
+
+/* ===== Forms ===== */
+.form-section {
+    margin: 15px 0;
+    text-align: center;
+}
+.form-section.hidden {
+    display: none;
+}
+.form-section input {
+    padding: 10px;
+    margin: 5px 0;
+    width: 60%;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+.form-section button {
+    margin: 10px 5px 0 5px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #8e7cc3;
+    color: white;
+    font-weight: bold;
+}
+.form-section button:hover {
+    background-color: #6b5aa3;
+}
+
+/* ===== Tables ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+/* ===== Transaction sub-tabs ===== */
+.transaction-tabs {
+    margin-bottom: 10px;
+}
+.trans-tab {
+    padding: 6px 12px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    background: #ddd;
+    border-radius: 6px;
+}
+.trans-tab.active {
+    background: #2ea6d6;
+    color: white;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .form-section input {
+        width: 90%;
+    }
+    .wallet-actions button {
+        width: 45%;
+        margin-bottom: 5px;
+    }
+}

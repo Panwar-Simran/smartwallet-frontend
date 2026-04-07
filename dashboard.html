@@ -2,116 +2,137 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartWallet Dashboard</title>
-    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Navbar -->
-    <header class="navbar">
-        <div class="logo">SmartWallet</div>
-        <div class="user-info">
-            <span id="userName">Hi, User</span>
-            <button id="logoutBtn">Logout</button>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>My Account</h3>
         </div>
-    </header>
-
-    <!-- Tabs -->
-    <div class="tabs">
-        <button class="tab-btn active" data-tab="wallet">Wallet</button>
-        <button class="tab-btn" data-tab="transactions">Transactions</button>
-        <button class="tab-btn" data-tab="profile">Profile</button>
+        <ul class="nav-links">
+  <li><a href="#" onclick="openViewProfile()">View Profile</a></li>
+<li><a href="#" onclick="openEditProfile()">Edit Profile</a></li>
+       </ul>
     </div>
 
-    <!-- Dynamic Tab Content -->
-    <div class="tab-content">
+    <div class="main-content" id="mainContent">
+        <nav class="top-navbar">
+            <div class="nav-left">
+                <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+                <span class="brand">Smart Wallet</span>
+            </div>
+            <div class="nav-right">
+         <span id="nav-username">Welcome, User</span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </nav>
 
-        <!-- Wallet Section -->
-        <section id="wallet" class="tab-section active">
-            <div class="wallet-card">
-                <h3>Balance</h3>
-                <p id="balance">₹0</p>
-                <div class="wallet-actions">
-                    <button id="addMoneyBtn">Add Money</button>
-                    <button id="sendMoneyBtn">Send Money</button>
+        <div class="dashboard-body">
+            <section class="hero-balance-card">
+                <div class="balance-info">
+                    <p>TOTAL WALLET BALANCE</p>
+                    <h1 id="balance">₹0.00</h1>
                 </div>
-            </div>
+                <div class="balance-actions">
+                    <button class="btn-cyan" onclick="openModal('add')">Add Money</button>
+                    <button class="btn-purple" onclick="openModal('send')">Send Money</button>
+                </div>
+            </section>
 
-            <!-- Add Money Form -->
-            <div id="addMoneyForm" class="form-section hidden">
-                <input type="number" id="addAmount" placeholder="Enter amount">
-                <button id="addMoneySubmit">Add</button>
-                <button class="cancelBtn">Cancel</button>
-            </div>
-
-            <!-- Send Money Form -->
-            <div id="sendMoneyForm" class="form-section hidden">
-                <input type="text" id="searchUser" placeholder="Search user by email">
-                <div id="searchResults"></div>
-                <input type="number" id="sendAmount" placeholder="Enter amount">
-                <button id="sendMoneySubmit">Send</button>
-                <button class="cancelBtn">Cancel</button>
-            </div>
-
-            <!-- Recent Transactions -->
-            <h4>Recent Transactions</h4>
-            <table id="recentTransactions">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Type</th>
-                        <th>Amount</th>
-                        <th>To/From</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </section>
-
-        <!-- Transactions Section -->
-        <section id="transactions" class="tab-section">
-            <div class="transaction-tabs">
-                <button class="trans-tab active" data-type="all">All</button>
-                <button class="trans-tab" data-type="sent">Sent</button>
-                <button class="trans-tab" data-type="received">Received</button>
-            </div>
-            <table id="transactionsTable">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Type</th>
-                        <th>Amount</th>
-                        <th>To/From</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </section>
-
-        <!-- Profile Section -->
-        <section id="profile" class="tab-section">
-            <!-- View Profile -->
-            <div id="viewProfile">
-                <p><strong>Name:</strong> <span id="profileName"></span></p>
-                <p><strong>Email:</strong> <span id="profileEmail"></span></p>
-                <p><strong>Phone:</strong> <span id="profilePhone"></span></p>
-                <button id="editProfileBtn">Edit Profile</button>
-            </div>
-
-            <!-- Edit Profile -->
-            <div id="editProfileForm" class="form-section hidden">
-                <input type="text" id="editName" placeholder="Full Name">
-                <input type="tel" id="editPhone" placeholder="Phone Number">
-                <button id="saveProfileBtn">Save</button>
-                <button class="cancelBtn">Cancel</button>
-            </div>
-        </section>
-
+            <section class="table-container">
+                <div class="table-header">
+                    <h3>Recent Transactions</h3>
+                    <div class="tabs">
+                       <button class="tab-active" onclick="switchTab(this, 'all')">All</button>
+                      <button onclick="switchTab(this, 'sent')">Sent</button>
+                     <button onclick="switchTab(this, 'received')">Received</button>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Sender</th>
+                            <th>Receiver</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactions">
+                        </tbody>
+                </table>
+            </section>
+        </div>
     </div>
 
-    <script src="js/apiRequest.js"></script>
+    
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modalTitle">Transaction</h3>
+                <span class="close-x" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group" id="recipientWrapper">
+               <label>Receiver (Name / Email)</label>
+              <input type="text" id="inputRecipient" placeholder="Search user..." onkeyup="searchUser()" autocomplete="off">
+    
+    <div id="searchResults" class="search-results"></div>
+</div>
+                <div class="input-group">
+                    <label>Amount (₹)</label>
+                    <input type="number" id="inputAmount" placeholder="0.00">
+                </div>
+                <button class="btn-submit" onclick="submitAction()">Confirm Transaction</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- View Profile Modal -->
+<div class="modal-overlay" id="viewProfileModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3>My Profile</h3>
+            <span class="close-x" onclick="closeViewProfile()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p><strong>Name:</strong> <span id="vp-name"></span></p>
+            <p><strong>Email:</strong> <span id="vp-email"></span></p>
+            <p><strong>Phone:</strong> <span id="vp-phone"></span></p>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal-overlay" id="editProfileModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3>Edit Profile</h3>
+            <span class="close-x" onclick="closeEditProfile()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="input-group">
+                <label>Name</label>
+                <input type="text" id="editName">
+            </div>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="text" id="editEmail">
+            </div>
+            <div class="input-group">
+                <label>Phone</label>
+                <input type="text" id="editPhone">
+            </div>
+            <button class="btn-submit" onclick="updateProfile()">Save Changes</button>
+        </div>
+    </div>
+</div>
+    <script src="js/api.js"></script>
     <script src="js/dashboard.js"></script>
+      
 </body>
 </html>

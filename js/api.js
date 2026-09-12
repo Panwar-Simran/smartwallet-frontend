@@ -1,5 +1,5 @@
 // apiRequest.js
-const BASE_URL = "http://localhost:8080";
+const BASE_URL='https://smartwallet-dn38.onrender.com';
 
 // Common API function
 async function apiRequest(endpoint, method = "GET", body = null) {
